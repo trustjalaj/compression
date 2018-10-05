@@ -11,8 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 @Service
@@ -74,23 +74,30 @@ public class CompressServiceImpl implements CompressService {
 
     @Override
     public void decompress(DeCompressDTO deCompressDTO) throws IOException {
-        //assign Input File : file2 to FileInputStream for reading data
-        FileInputStream fis = new FileInputStream(defaultDir + deCompressDTO.getInputDir());
-
-        //assign output file: file3 to FileOutputStream for reading the data
-        FileOutputStream fos = new FileOutputStream(defaultDir + deCompressDTO.getOutputDir());
-
-        //assign inflaterInputStream to FileInputStream for uncompressing the data
-        InflaterInputStream iis = new InflaterInputStream(fis);
-
-        //read data from inflaterInputStream and write it into FileOutputStream
-        int data;
-        while ((data = iis.read()) != -1) {
-            fos.write(data);
+        String inputDir = defaultDir + deCompressDTO.getInputDir() + "/";
+        String outputDir = defaultDir + deCompressDTO.getOutputDir() + "/";
+        File folder = new File(inputDir);
+        List<String> list = listFilesForFolder(folder);
+        if (list != null) {
+            for (String aFile : list) {
+                String fileZip = deCompressDTO.getInputDir() + aFile;
+                byte[] buffer = new byte[1024];
+                ZipInputStream zis = new ZipInputStream(new FileInputStream(fileZip));
+                ZipEntry zipEntry = zis.getNextEntry();
+                while (zipEntry != null) {
+                    String fileName = zipEntry.getName();
+                    File newFile = new File(outputDir + fileName);
+                    FileOutputStream fos = new FileOutputStream(newFile);
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.close();
+                    zipEntry = zis.getNextEntry();
+                }
+                zis.closeEntry();
+                zis.close();
+            }
         }
-
-        //close the files
-        fos.close();
-        iis.close();
     }
 }
