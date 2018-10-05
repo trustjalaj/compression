@@ -35,8 +35,8 @@ public class CompressServiceImpl implements CompressService {
 
     @Override
     public void compress(CompressDTO compressDTO) throws IOException {
-        String inputDir = defaultDir + compressDTO.getInputDir();
-        String outputDir = defaultDir + compressDTO.getOutputDir();
+        String inputDir = defaultDir + compressDTO.getInputDir() + "/";
+        String outputDir = defaultDir + compressDTO.getOutputDir() + "/";
         File folder = new File(inputDir);
         final int BUFFER = 104857600; // 100MB
         final long MAX_ZIP_SIZE = compressDTO.getMaxSize();
