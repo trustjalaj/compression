@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -27,7 +28,11 @@ public class CompressResource {
 
     @PostMapping("/compress")
     public ResponseEntity<Void> compress(@Valid @RequestBody CompressDTO compressDTO) throws URISyntaxException {
-        compressService.compress(compressDTO);
+        try {
+            compressService.compress(compressDTO);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.created(new URI("/api/compress/"))
             .headers(HeaderUtil.createAlert("All files are compressed successfully " + null, null))
             .body(null);
@@ -35,7 +40,11 @@ public class CompressResource {
 
     @PostMapping("/decompress")
     public ResponseEntity<Void> decompress(@Valid @RequestBody DeCompressDTO deCompressDTO) throws URISyntaxException {
-        compressService.decompress(deCompressDTO);
+        try {
+            compressService.decompress(deCompressDTO);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.created(new URI("/api/decompress/"))
             .headers(HeaderUtil.createAlert("All files are decompressed successfully " + null, null))
             .body(null);

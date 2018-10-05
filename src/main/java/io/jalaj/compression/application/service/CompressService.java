@@ -3,8 +3,10 @@ package io.jalaj.compression.application.service;
 import io.jalaj.compression.application.service.dto.CompressDTO;
 import io.jalaj.compression.application.service.dto.DeCompressDTO;
 
-public interface CompressService {
-    void compress(CompressDTO compressService);
+import java.io.IOException;
 
-    void decompress(DeCompressDTO compressDTO);
+public interface CompressService {
+    void compress(CompressDTO compressService) throws IOException;
+
+    void decompress(DeCompressDTO compressDTO) throws IOException;
 }
