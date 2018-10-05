@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "jhipsterCompressionApp",
+    "packageName": "io.jalaj.compression.application",
+    "packageFolder": "io/jalaj/compression/application",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "jwt",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "gradle",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "5.4.1",
+    "jwtSecretKey": "ZTE3YTRlM2IyMjNjYTczZTVmZTg2ZWQ3NGU3ZjhiZjMzNmMxZDRhNzNhZmY5YmNlYWY0M2RhNTc1OWIzOTI4YjVlMGE4MTgzZTNmM2ZmYjdkNDcwNGM0OTgzYmJkNjg4ZTM0ZGMxMTM3OWU1YmZhYjczOWM0MTIyZTQ1YWNkZjc="
+  },
+  "git-provider": "GitHub",
+  "git-company": "trustjalaj",
+  "repository-name": "compression"
+}
